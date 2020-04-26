@@ -2,16 +2,20 @@ import React from 'react'
 import moment from 'moment'
 
 const Date = () => {
+  // Get start date of actual month.
   const monthStartDate = () => {
     let firstDate = moment().startOf('month').format('d')
     return firstDate
   }
 
+  // Get end date of actual month.
   const endOfMonth = () => {
     let lastDate = moment().endOf('month').format('d')
     return parseInt(lastDate)
   }
 
+  // Get last dates of previous month.
+  // Use of exact date for each date as a unique key.
   const prevMonthDays = () => {
     let prevMonthLastDays = []
     let prevMonthDaysSquares = []
@@ -30,6 +34,10 @@ const Date = () => {
     return prevMonthDaysSquares
   }
 
+  // Get first days of next month.
+  // Use of exact date as a unique key for each day.
+  // Use of switch statement to determine how many days we still need
+  // to render for the calendar view to be completed.
   const nextMonthDays = () => {
     let nextMonthFirstDays = []  
     let nextMonthDaysSquares = []
@@ -75,6 +83,8 @@ const Date = () => {
     return daysOfMonth
   }
 
+  // After getting the days in the month, push them as td elements in array
+  // days.
   const days = () => {
     let days = []
 
@@ -88,6 +98,12 @@ const Date = () => {
     return days
   }
 
+  // Create the rows and fill them with each date.
+  // Constant blocks that holds all the dates, including: previous month, actual and
+  // next month.
+  // Iterate over blocks array, if index is not 0, remain in the corresponding week.
+  // When reaching next week, pass all the week to the rows array.
+  // Start over by emptying the cells and pushing rows to the new container.
   const rows = () => {
     const blocks = [...prevMonthDays(),...days(),...nextMonthDays()]
     let rows = []
@@ -100,7 +116,8 @@ const Date = () => {
         cells = []
         cells.push(row)
       }
-  
+      
+      // When the loop has ended, add the remaining date.
       if (i === blocks.length - 1) {
         rows.push(cells)
       }
@@ -109,13 +126,14 @@ const Date = () => {
     return rows
   }
 
-
+  // Create the tr elements by mapping over rows.
   const dates = rows().map((date, i) => {
     return (
       <tr key={i}>{date}</tr>
     )
   })
 
+  // At last return the tbody with the dates.
   return <tbody>{dates}</tbody>
 }
 

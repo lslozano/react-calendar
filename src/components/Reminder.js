@@ -7,6 +7,7 @@ class Reminder extends Component {
       title: "",
       description: "",
       city: "",
+      time: "",
       color: ""
     }
     this.handleChange = this.handleChange.bind(this)
@@ -23,6 +24,7 @@ class Reminder extends Component {
     return (
       <>
         <form onSubmit={this.handleSubmit}>
+          <p>Add reminder:</p>
           <input
             required
             type="text"
@@ -49,6 +51,13 @@ class Reminder extends Component {
             placeholder="City"
             onChange={this.handleChange}
           />
+          <label>Chose a time:</label>
+          <input
+            type="time"
+            name="time"
+            value={this.state.time}
+            onChange={this.handleChange} 
+          />  
           <label>Choose a color:</label>
           <select 
             value={this.state.color} 
@@ -60,7 +69,7 @@ class Reminder extends Component {
             <option value="green">Green</option>
             <option value="purple">Purple</option>
           </select>
-          <button>Add reminder</button>
+          <button>Confirm</button>
         </form>
         <div>
           <p>Title:</p>
@@ -69,6 +78,8 @@ class Reminder extends Component {
           <p>{this.state.description}</p>
           <p>City:</p>
           <p>{this.state.city}</p>
+          <p>Time:</p>
+          <p>{this.state.time}</p>
         </div>
       </>
     )

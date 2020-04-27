@@ -19,6 +19,9 @@ const Date = () => {
   const prevMonthDays = () => {
     let prevMonthLastDays = []
     let prevMonthDaysSquares = []
+    const color = {
+      color: 'gray'
+    }
 
     for (let i = 0; i < monthStartDate(); i++) {
       prevMonthLastDays.push(moment().startOf('month').subtract(i + 1, 'day').format('D'))
@@ -27,7 +30,7 @@ const Date = () => {
 
     for (let i = 0; i < monthStartDate(); i++) {
       prevMonthDaysSquares.push(
-        <td key={moment().startOf('month').subtract(i, 'day')}>{prevMonthLastDays[i]}</td>
+        <td style={color} className="prevMonthDays" key={moment().startOf('month').subtract(i, 'day')}>{prevMonthLastDays[i]}</td>
       )
     }
 
@@ -41,6 +44,9 @@ const Date = () => {
   const nextMonthDays = () => {
     let nextMonthFirstDays = []  
     let nextMonthDaysSquares = []
+    const color = {
+      color: 'gray'
+    }
 
     switch(endOfMonth()) {
       case 0:
@@ -61,9 +67,6 @@ const Date = () => {
       case 5:
         nextMonthFirstDays = [1]
         break;
-      case 6:
-        nextMonthFirstDays = []
-        break;
       default:
         nextMonthFirstDays = []
         break;
@@ -71,7 +74,7 @@ const Date = () => {
 
     for (let i = 0; i < nextMonthFirstDays.length; i++) {
       nextMonthDaysSquares.push(
-        <td key={moment().endOf('month').add(i + 1, 'day')}>{nextMonthFirstDays[i]}</td>
+        <td style={color} className="nextMonthDays" key={moment().endOf('month').add(i + 1, 'day')}>{nextMonthFirstDays[i]}</td>
       )
     }
 
@@ -90,11 +93,12 @@ const Date = () => {
 
     for (let day = 1; day <= daysOfMonth(); day++) {
       days.push(
-        <td key={day}>
+        <td className="days" key={day}>
           {day}
         </td>
       )
     }
+
     return days
   }
 
@@ -128,9 +132,16 @@ const Date = () => {
 
   // Create the tr elements by mapping over rows.
   const dates = rows().map((date, i) => {
-    return (
-      <tr key={i}>{date}</tr>
-    )
+    const pointer = {
+      cursor: 'pointer' 
+    }
+  
+    if (date.length >= 1) {
+      return (
+        <tr style={pointer} key={i}>{date}</tr>
+      )
+    } 
+    return null
   })
 
   // At last return the tbody with the dates.

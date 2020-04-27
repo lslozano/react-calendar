@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-spacing: 0
+}
+
+td:nth-child(1),
+td:nth-child(7) {
+  background-color: lightgray;
+  color: blue
+}
+
+.calendar {
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: 90vw;
+  height: 50vh;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.calendar td {
+  border: 1px solid rgba(0, 0, 0, 0.7)
+}
+
+.calendar tr {
+  width: 20vw;
+}
+
+.calendar td:hover {
+  background-color: lightblue;
+}
+
+.weekDays {
+  background-color: rgba(0, 150,200);
+  color: white;
+  width: 11vw
+}
+

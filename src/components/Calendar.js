@@ -8,7 +8,7 @@ function Calendar() {
   const month = moment().format("MMMM")
 
   return (
-    <>
+    <main>
       <h2>{month}</h2>
       <table className="calendar">
         <thead>
@@ -16,7 +16,7 @@ function Calendar() {
         </thead>
         <Date />
       </table>
-    </>
+    </main>
   )
 }
 

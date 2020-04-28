@@ -1,89 +1,85 @@
-import React, { Component } from 'react'
+import React from 'react'
+import moment from 'moment'
 
-class Reminder extends Component {
-  constructor() {
-    super()
-    this.state = {
-      title: "",
-      description: "",
-      city: "",
-      time: "",
-      color: ""
+function ReminderComponent(props) {
+  const getDays = () => {
+    let daysOfMonth = moment().daysInMonth()
+    let daySelector = []
+    for (let i = 1; i <= daysOfMonth; i++) {
+      daySelector.push(i)
     }
-    this.handleChange = this.handleChange.bind(this)
+    return daySelector
   }
 
-  handleChange(event) {
-    const {name, value} = event.target
-    this.setState({
-      [name]: value 
-    })
-  }
-
-  render() {
-    return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <p>Add reminder:</p>
-          <input
-            required
-            type="text"
-            maxLength="20"
-            name="title"
-            value={this.state.title}
-            placeholder="Title"
-            onChange={this.handleChange}
-          />
-          <br />
-          <input
-            type="text"
-            maxLength="30"
-            name="description"
-            value={this.state.description}
-            placeholder="Description"
-            onChange={this.handleChange}
-          />
-          <input 
-            type="text"
-            maxLength="15"
-            name="city"
-            value={this.state.city}
-            placeholder="City"
-            onChange={this.handleChange}
-          />
-          <label>Chose a time:</label>
-          <input
-            type="time"
-            name="time"
-            value={this.state.time}
-            onChange={this.handleChange} 
-          />  
-          <label>Choose a color:</label>
-          <select 
-            value={this.state.color} 
-            onChange={this.handleChange} 
-            name="color"
-          >
-            <option value="red">Red</option>
-            <option value="orange">Orange</option>
-            <option value="green">Green</option>
-            <option value="purple">Purple</option>
-          </select>
-          <button>Confirm</button>
-        </form>
-        <div>
-          <p>Title:</p>
-          <h1 style={this.state}>{this.state.title}</h1>
-          <p>Description:</p>
-          <p>{this.state.description}</p>
-          <p>City:</p>
-          <p>{this.state.city}</p>
-          <p>Time:</p>
-          <p>{this.state.time}</p>
-        </div>
-      </>
-    )
-  }
+  return (
+    <div className="form">
+      <form className="pure-form pure-form-stacked" onSubmit={props.handleSubmit}>
+        <h3>Add reminder</h3>
+        <label>Title:</label>
+        <input
+          required
+          type="text"
+          maxLength="20"
+          name="title"
+          value={props.data.reminder.title}
+          placeholder="Title"
+          onChange={props.handleChange}
+        />
+        <label>Description:</label>
+        <input
+          type="text"
+          maxLength="30"
+          name="description"
+          value={props.data.reminder.description}
+          placeholder="Description"
+          onChange={props.handleChange}
+        />
+        <label>City:</label>
+        <input 
+          type="text"
+          maxLength="15"
+          name="city"
+          value={props.data.reminder.city}
+          placeholder="City"
+          onChange={props.handleChange}
+        />
+        <label>Choose a day:</label>
+        <select
+          value={props.data.reminder.day} 
+          onChange={props.handleChange} 
+          name="day"
+        >
+          <option>-</option>
+          {getDays().map(day => {
+            return (
+              <option key={day} value={day}>{day}</option>
+              )
+            })
+          }
+        </select>
+        <label>Choose a time:</label>
+        <input
+          type="time"
+          name="time"
+          value={props.data.reminder.time}
+          onChange={props.handleChange} 
+        />  
+        <label>Choose a color:</label>
+        <select 
+          value={props.data.reminder.color} 
+          onChange={props.handleChange} 
+          name="color"
+        >
+          <option>-</option>
+          <option value="red">Red</option>
+          <option value="orange">Orange</option>
+          <option value="green">Green</option>
+          <option value="purple">Purple</option>
+        </select>
+        <button className="pure-button pure-button-primary">Confirm</button>
+      </form>
+    </div>
+  )
 }
 
-export default Reminder
+export default ReminderComponent

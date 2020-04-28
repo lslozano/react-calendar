@@ -93,8 +93,10 @@ const Date = () => {
 
     for (let day = 1; day <= daysOfMonth(); day++) {
       days.push(
-        <td className="days" key={day}>
-          {day}
+        <td key={day}>
+          <div className="scroll">
+            {day}
+          </div>
         </td>
       )
     }
@@ -132,6 +134,7 @@ const Date = () => {
 
   // Create the tr elements by mapping over rows.
   const dates = rows().map((date, i) => {
+
     const pointer = {
       cursor: 'pointer' 
     }

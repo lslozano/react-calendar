@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import '../index.css'
 
-const WeekDays = () => {
+function WeekDays() {
   return (
     <tr>
       {moment.weekdays().map((day, i) => {

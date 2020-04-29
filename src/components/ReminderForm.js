@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-function ReminderComponent(props) {
+function Reminder(props) {
   const getDays = () => {
     let daysOfMonth = moment().daysInMonth()
     let daySelector = []
@@ -12,6 +12,7 @@ function ReminderComponent(props) {
   }
 
   return (
+    <div>
     <div className="form">
       <form className="pure-form pure-form-stacked" onSubmit={props.handleSubmit}>
         <h3>Add reminder</h3>
@@ -76,10 +77,16 @@ function ReminderComponent(props) {
           <option value="green">Green</option>
           <option value="purple">Purple</option>
         </select>
-        <button className="pure-button pure-button-primary">Confirm</button>
+        <button className="confirm pure-button pure-button-primary" onClick={props.updateState}>Confirm</button>
+        <button className="pure-button pure-button-primary" onClick={props.clearFields}>Clear fields</button>
       </form>
+    </div>
+    <div>
+      <h3>Entered reminder:</h3>
+      <p style={props.data.reminder}>{props.data.reminder.title}</p>
+    </div>
     </div>
   )
 }
 
-export default ReminderComponent
+export default Reminder

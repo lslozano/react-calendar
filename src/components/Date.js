@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-const Date = () => {
+function Date(props) {
   // Get start date of actual month.
   const monthStartDate = () => {
     let firstDate = moment().startOf('month').format('d')
@@ -30,7 +30,15 @@ const Date = () => {
 
     for (let i = 0; i < monthStartDate(); i++) {
       prevMonthDaysSquares.push(
-        <td style={color} className="prevMonthDays" key={moment().startOf('month').subtract(i, 'day')}>{prevMonthLastDays[i]}</td>
+        <td 
+          style={color} 
+          className="prevMonthDays" 
+          key={moment().startOf('month').subtract(i, 'day')}
+        >
+          <div className={"scroll"}>
+            {prevMonthLastDays[i]}
+          </div>
+        </td>
       )
     }
 
@@ -74,7 +82,15 @@ const Date = () => {
 
     for (let i = 0; i < nextMonthFirstDays.length; i++) {
       nextMonthDaysSquares.push(
-        <td style={color} className="nextMonthDays" key={moment().endOf('month').add(i + 1, 'day')}>{nextMonthFirstDays[i]}</td>
+        <td 
+          style={color} 
+          className="nextMonthDays" 
+          key={moment().endOf('month').add(i + 1, 'day')}
+        >
+          <div className="scroll">
+            {nextMonthFirstDays[i]}
+          </div>
+        </td>
       )
     }
 
@@ -90,18 +106,52 @@ const Date = () => {
   // days.
   const days = () => {
     let days = []
+    let dates = {}
+    let dayCell = []
 
     for (let day = 1; day <= daysOfMonth(); day++) {
-      days.push(
-        <td key={day}>
-          <div className="scroll">
-            {day}
-          </div>
-        </td>
-      )
+      days.push(day)
     }
 
-    return days
+    days.map(day => {        
+      if (!dates[day]) {
+        dates[day] = []
+      }
+      return dates
+    })
+
+    if (props.data.reminders) {
+      props.data.reminders.map(reminder => {
+        for (const day in dates) {
+          if (reminder.day === parseInt(day)) {
+            dates[day].push(reminder.title)
+          }
+        }
+        return dates
+      })
+    }
+    
+    for (const key in dates) {
+      if (dates[key].length >= 1) {
+        dayCell.push(
+          <td key={key}>
+            <div className="scroll">
+              {key}
+              <p>{dates[key]}</p>
+            </div>
+          </td>
+        )
+      } else (
+        dayCell.push(
+          <td key={key}>
+            <div className="scroll">
+              {key}
+            </div>
+          </td>
+        )
+      )}
+    
+    return dayCell
   }
 
   // Create the rows and fill them with each date.

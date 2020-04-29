@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import WeekDays from './WeekDays'
 import Date from './Date'
-import ReminderComponent from './Reminder'
+import ReminderForm from './ReminderForm'
 import moment from 'moment'
 import '../index.css'
 
@@ -21,6 +21,7 @@ class Calendar extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.clearFields = this.clearFields.bind(this)
   }
 
   handleChange(event) {
@@ -33,9 +34,34 @@ class Calendar extends Component {
   }
   
   handleSubmit(event) {
-    this.state.reminders.push(this.state.reminder)
     alert('A new reminder has been created!')
+    this.setState({
+      reminders: [this.state.reminder]
+
+    })
     event.preventDefault()
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.reminders === this.state.reminders) {
+      this.setState({
+        reminders: this.state.reminder
+      })
+    }
+  }
+
+
+  clearFields() {
+    this.setState({
+      reminder: {
+        title: "",
+        description: "",
+        city: "",
+        day: "",
+        time: "",
+        color: ""
+      }
+    })
   }
 
   render() {
@@ -48,11 +74,14 @@ class Calendar extends Component {
           <thead>
             <WeekDays />
           </thead>
-          <Date />
+          <Date 
+            data={this.state.reminders}
+          />
         </table>
-        <ReminderComponent 
+        <ReminderForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          clearFields={this.clearFields}
           data={this.state}
         />
       </main>

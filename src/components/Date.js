@@ -109,6 +109,50 @@ function Date(props) {
     let dates = {}
     let dayCell = []
 
+    // Placeholder reminders
+    const reminders = [
+      {
+      title: "React proyect",
+      description: "Work on the new app",
+      city: "Mexico",
+      day: "1",
+      time: "12:50",
+      color: "red"
+      },
+      {
+        title: "Buy food",
+        description: "Milk, egg, cereal",
+        city: "Mexico",
+        day: "5",
+        time: "10:00",
+        color: "blue"
+      },
+      {
+        title: "Exercise",
+        description: "Workout rutine",
+        city: "Mexico",
+        day: "15",
+        time: "09:00",
+        color: "red"
+      },
+      {
+        title: "Pay gas",
+        description: "Need to pay gas asap",
+        city: "Mexico",
+        day: "20",
+        time: "10:00",
+        color: "red"
+      },
+      {
+        title: "Chill",
+        description: "Watch some movies",
+        city: "Mexico",
+        day: "25",
+        time: "20:00",
+        color: "blue"
+      }      
+    ]
+
     for (let day = 1; day <= daysOfMonth(); day++) {
       days.push(day)
     }
@@ -120,16 +164,14 @@ function Date(props) {
       return dates
     })
 
-    if (props.data.reminders) {
-      props.data.reminders.map(reminder => {
-        for (const day in dates) {
-          if (reminder.day === parseInt(day)) {
-            dates[day].push(reminder.title)
-          }
+    reminders.map(reminder => {
+      for (const day in dates) {
+        if (reminder.day === day) {
+          dates[day].push(reminder.title)
         }
-        return dates
-      })
-    }
+      }
+      return dates
+    })
     
     for (const key in dates) {
       if (dates[key].length >= 1) {
@@ -138,6 +180,8 @@ function Date(props) {
             <div className="scroll">
               {key}
               <p>{dates[key]}</p>
+              <p>Reminder for scroll</p>
+              <p>Reminder for scroll</p>
             </div>
           </td>
         )

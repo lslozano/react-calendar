@@ -12,7 +12,7 @@ function Reminder(props) {
   }
 
   return (
-    <div>
+    <div className="reminder">
     <div className="form">
       <form className="pure-form pure-form-stacked" onSubmit={props.handleSubmit}>
         <h3>Add reminder</h3>
@@ -81,10 +81,16 @@ function Reminder(props) {
         <button className="pure-button pure-button-primary" onClick={props.clearFields}>Clear fields</button>
       </form>
     </div>
-    <div>
-      <h3>Entered reminder:</h3>
-      <p style={props.data.reminder}>{props.data.reminder.title}</p>
-    </div>
+      <div className="info">
+        <h3>Entered reminder:</h3>
+        <p style={props.data.reminder}>{props.data.reminder.title}</p>
+        <p>{props.data.reminder.description}</p>
+        <p>{props.data.reminder.city}</p>
+        <p>{props.data.reminder.day}</p>
+        <p>{props.data.reminder.time}</p>
+        <p style={props.data.reminder}>{props.data.reminder.color}</p>
+        <p></p>
+      </div>
     </div>
   )
 }

@@ -62,6 +62,29 @@ td:nth-child(7) {
 }
 
 .form {
+  margin-top: 5px;
+  margin-bottom: 5px;
   padding: 20px 12px 10px 20px;
+  border: 1px solid rgba(0, 150,200)
 }
 
+.confirm {
+  margin-right: 5px;
+}
+
+.reminder {
+  display: flex;
+  justify-content: space-around
+}
+
+.info {
+  width: 40vw;
+  height: 40vw;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(0, 150,200);
+}
+
+.info h3, p {
+  margin-left: 5px;
+}
